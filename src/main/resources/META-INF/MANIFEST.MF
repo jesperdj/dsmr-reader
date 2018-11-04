@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.jesperdj.dsmr.reader.DsmrReader
+Class-Path: /opt/pi4j/lib/pi4j-core.jar /opt/pi4j/lib/pi4j-device.jar /opt/pi4j/lib/pi4j-gpio-extension.jar
