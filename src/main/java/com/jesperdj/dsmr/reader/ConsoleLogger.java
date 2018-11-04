@@ -9,6 +9,6 @@ public class ConsoleLogger implements Logger {
 
     @Override
     public void log(Level level, String msg, Object... args) {
-        System.out.printf("[%s] %-5s %s%n", LOG_TIMESTAMP_FORMATTER.format(LocalDateTime.now()), level, String.format(msg, args));
+        System.out.printf("%s %-5s %s%n", LOG_TIMESTAMP_FORMATTER.format(LocalDateTime.now()), level, String.format(msg, args));
     }
 }

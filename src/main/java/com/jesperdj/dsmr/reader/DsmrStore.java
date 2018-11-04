@@ -1,14 +1,25 @@
 package com.jesperdj.dsmr.reader;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
-public class DsmrStore implements Consumer<String> {
+import static com.jesperdj.dsmr.reader.DsmrReader.log;
+
+public class DsmrStore implements Consumer<DsmrMessage> {
 
     @Override
-    public void accept(String message) {
-        // TODO: parse date out of message
-        // line looks like this: 0-0:1.0.0(181104123918W)
-        // number between parenthesis is a timestamp (yyMMddHHmmss'W')
-        // append message to a file named 20yyMMdd.dsmr; create file if it does not yet exist
+    public void accept(DsmrMessage message) {
+        String filename = String.format("%1$tY%1$tm%1$td.dsmr", message.getDateTime());
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename, true), StandardCharsets.US_ASCII))) {
+            for (String record : message.getRecords()) {
+                out.write(record);
+            }
+        } catch (IOException e) {
+            log.warn("Error writing message to file: %s", filename);
+        }
     }
 }

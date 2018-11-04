@@ -1,13 +1,6 @@
 package com.jesperdj.dsmr.reader;
 
-import com.pi4j.io.serial.Baud;
-import com.pi4j.io.serial.DataBits;
-import com.pi4j.io.serial.FlowControl;
-import com.pi4j.io.serial.Parity;
-import com.pi4j.io.serial.Serial;
-import com.pi4j.io.serial.SerialConfig;
-import com.pi4j.io.serial.SerialFactory;
-import com.pi4j.io.serial.StopBits;
+import com.pi4j.io.serial.*;
 
 import java.io.IOException;
 
@@ -26,14 +19,7 @@ public class DsmrReader {
         DsmrParser parser = new DsmrParser(store);
 
         Serial serial = SerialFactory.createInstance();
-        serial.addListener(event -> {
-            try {
-                parser.parse(event.getAsciiString());
-            } catch (IOException e) {
-                log.warn("Error while receiving data: %s", e.getMessage());
-                parser.reset();
-            }
-        });
+        serial.addListener(new LineListener(parser));
 
         SerialConfig config = new SerialConfig();
         config.device(device)
