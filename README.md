@@ -35,6 +35,10 @@ Run it on the Raspberry Pi:
 
     java -jar dsmr-reader-1.0-SNAPSHOT.jar
 
+Or to make it run in the background, saving logging to a file:
+
+    nohup java -jar dsmr-reader-1.0-SNAPSHOT.jar > log.txt & 
+
 If the USB port that the cable to your smart meter is connected to is different from the default `/dev/ttyUSB0`, then you can specify a different name on the command line, for example:
 
     java -jar dsmr-reader-1.0-SNAPSHOT.jar /dev/ttyS0
