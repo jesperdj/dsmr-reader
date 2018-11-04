@@ -8,7 +8,7 @@ On the Raspberry Pi:
 * WiringPi: `sudo apt-get install wiringpi`
 * Pi4J version 1.2-SNAPSHOT (see below)
 
-This uses Pi4J 1.2-SNAPSHOT instead of 1.1 because 1.2-SNAPSHOT has support for the Raspberry Pi Zero W.
+This uses Pi4J 1.2-SNAPSHOT instead of 1.1 because 1.2-SNAPSHOT has support for the Raspberry Pi Zero W, which is what I am using for this project.
 
 To install Pi4J 1.2-SNAPSHOT:
 
