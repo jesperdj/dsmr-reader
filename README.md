@@ -27,6 +27,8 @@ Build with `mvn clean package`
 
 ## Running
 
+After building, copy the JAR file `dsmr-reader-1.0-SNAPSHOT.jar` in the `target` directory to the Raspberry Pi.
+
 Run it on the Raspberry Pi: `java -jar dsmr-reader-1.0-SNAPSHOT.jar`
 
 Note: The JAR file is an executable JAR with a custom manifest that points to the Pi4J JAR files, in the location where they will be installed when you installed the Pi4J package (directory: `/opt/pi4j/lib`).
