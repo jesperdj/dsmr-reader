@@ -16,6 +16,8 @@ public class DsmrReader {
         log.debug("Using device: %s", device);
 
         DsmrStore store = new DsmrStore();
+        store.startup();
+
         DsmrParser parser = new DsmrParser(store);
 
         Serial serial = SerialFactory.createInstance();
