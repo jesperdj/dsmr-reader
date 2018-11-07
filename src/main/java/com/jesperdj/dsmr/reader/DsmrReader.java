@@ -1,11 +1,18 @@
 package com.jesperdj.dsmr.reader;
 
-import com.pi4j.io.serial.*;
+import com.pi4j.io.serial.Baud;
+import com.pi4j.io.serial.DataBits;
+import com.pi4j.io.serial.FlowControl;
+import com.pi4j.io.serial.Parity;
+import com.pi4j.io.serial.Serial;
+import com.pi4j.io.serial.SerialConfig;
+import com.pi4j.io.serial.SerialFactory;
+import com.pi4j.io.serial.StopBits;
 
 import java.io.IOException;
 
 public class DsmrReader {
-    public static final Logger log = new ConsoleLogger();
+    private static final Logger log = LoggerFactory.getLogger(DsmrReader.class);
 
     private static final String DEFAULT_DEVICE = "/dev/ttyUSB0";
 

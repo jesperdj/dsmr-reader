@@ -1,7 +1,5 @@
 package com.jesperdj.dsmr.reader;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -12,9 +10,7 @@ public class DsmrParser implements Consumer<String> {
 
     private final Consumer<DsmrMessage> messageConsumer;
 
-    private final List<String> messageLines = new ArrayList<>();
-
-    private boolean messageStarted = false;
+    private DsmrMessage.Builder messageBuilder;
 
     public DsmrParser(Consumer<DsmrMessage> messageConsumer) {
         this.messageConsumer = messageConsumer;
@@ -22,17 +18,16 @@ public class DsmrParser implements Consumer<String> {
 
     @Override
     public void accept(String line) {
-        if (!messageStarted) {
+        if (messageBuilder == null) {
             if (START_OF_MESSAGE.matcher(line).matches()) {
-                messageLines.add(line);
-                messageStarted = true;
+                messageBuilder = new DsmrMessage.Builder();
+                messageBuilder.addRecord(line);
             }
         } else {
-            messageLines.add(line);
+            messageBuilder.addRecord(line);
             if (END_OF_MESSAGE.matcher(line).matches()) {
-                messageConsumer.accept(new DsmrMessage(messageLines));
-                messageLines.clear();
-                messageStarted = false;
+                messageConsumer.accept(messageBuilder.build());
+                messageBuilder = null;
             }
         }
     }

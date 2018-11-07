@@ -6,9 +6,9 @@ import com.pi4j.io.serial.SerialDataEventListener;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-import static com.jesperdj.dsmr.reader.DsmrReader.log;
-
 public class LineListener implements SerialDataEventListener {
+    private static final Logger log = LoggerFactory.getLogger(LineListener.class);
+
 
     private final Consumer<String> lineConsumer;
 
